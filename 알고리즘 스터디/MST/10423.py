@@ -1,3 +1,6 @@
+# 처음에는 발전소를 체크하는 함수를 따로 만들어주었다.
+# 그렇게 하니 시간 초과 발생.
+# 발전소를 0번 노드라고 생각하고, 발전소에 연결 된 것은 다 parent = 0 이 되게하면 된다.
 N,M,K = map(int,input().split())
 g = list(map(int,input().split()))
 gen = list(range(N+1))

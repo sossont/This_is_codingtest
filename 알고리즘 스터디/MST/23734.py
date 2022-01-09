@@ -1,6 +1,6 @@
 N,M = map(int,input().split())
 warp = []
-parent = [i for i in range(N+1)]
+parent = list(range(N+1))
 
 for _ in range(M):
     a,b,c = map(int,input().split())
@@ -18,8 +18,7 @@ answer = 0
 def find_parent(p):
     if p != parent[p]:
         parent[p] = find_parent(parent[p])
-    else:
-        return parent[p]
+    return parent[p]
 
 def union(n1,n2):
     p1 = find_parent(n1)
