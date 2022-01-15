@@ -54,4 +54,3 @@ for _ in range(N):
 x1, x2 = atoi('A'), atoi('Z')
 print(networkFlow(x1,x2))
 
-
