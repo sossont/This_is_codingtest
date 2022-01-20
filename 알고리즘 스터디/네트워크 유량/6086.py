@@ -1,12 +1,9 @@
 from collections import deque
 
-MAX = 126
+MAX = 200
 INF = 987654321
-N = int(input())
-
 flow = [[0] * MAX for _ in range(MAX)]
 capacity = [[0] * MAX for _ in range(MAX)]
-
 
 def atoi(char):
     return ord(char) - ord('A')
@@ -43,13 +40,16 @@ def networkFlow(source, sink):
         ret += amount
     return ret
 
+## Input Layer
+N,M = map(int,input().split())
+A = list(map(int,input().split()))
+B = list(map(int,input().split()))
+C = []
+for i in range(M):
+    c = list(map(int,input().split()))
+    C.append(c)
 
-for _ in range(N):
-    pipe1, pipe2, velocity = input().split()
-    pipe1, pipe2 = atoi(pipe1), atoi(pipe2)
-    velocity = int(velocity)
-    capacity[pipe1][pipe2] += velocity
-    capacity[pipe2][pipe1] += velocity
+
 
 x1, x2 = atoi('A'), atoi('Z')
 print(networkFlow(x1,x2))
