@@ -38,3 +38,36 @@ def solution(stones, k):
         idxarr[num[1]] = 1
 
 '''
+
+# 이분 탐색 이용해야 풀리는 문제
+# 어렵다.
+
+def solution(stones, k):
+    answer = 0
+    left = 0
+    right = max(stones)
+    while left <= right:
+        mid = int( (left+right) / 2)
+        arr = []
+        count = 0
+        for stone in stones:
+            arr.append(stone - mid)
+        print(arr)
+
+        for num in arr:
+            if count < k:
+                if num <= 0:
+                    count += 1
+                else:
+                    count = 0
+
+        if count < k:  # 가능
+            left = mid+1
+        else: # 불가능
+            right = mid-1
+            answer = mid
+
+    return answer
+
+
+print(solution([2, 4, 5, 3, 2, 1, 4, 2, 5, 1],3))
