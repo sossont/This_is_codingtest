@@ -21,6 +21,7 @@ def solution(user_id, banned_id):
     for usr in user_id: # User 아이디 순회 하면서
         isfound = [0 for _ in range(len(user_id))]
         usr_idx += 1
+        flag = True
 
         if len(usr) == len(banned_id[i]):  # 길이가 같으면 대조해본다.
             flag = False
@@ -53,7 +54,7 @@ def count(banned_id, user_id, banidx, isfound, cnt):
 
         if len(usr) == len(banned_id[banidx]):  # 길이가 같으면 대조해본다.
             flag = False
-            if len(banned_star[banidx]) == 0:   # *로만 되어있는 불량 아이디
+            if len(banned_star[banidx]) == 0:
                 flag = True
             else:
                 for num in banned_star[banidx]:
