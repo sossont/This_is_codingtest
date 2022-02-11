@@ -1,34 +1,18 @@
-'''
-- 0.5솔, 효율성은 다 시간 초과. 정확성 통과.
-- 딱봐도 시간 초과 날 것 같았음
-- 시간 초과 해결하는 방법은 뭐가있을까
-'''
-def solution(stones, k):
-    answer = 0
-    left = 0
-    right = max(stones)
-    while left <= right:
-        mid = int( (left+right) / 2)
-        arr = []
-        count = 0
-        for stone in stones:
-            arr.append(stone - mid)
-        print(arr)
 
-        for num in arr:
-            if count < k:
-                if num <= 0:
-                    count += 1
-                else:
-                    count = 0
-
-        if count < k:  # 가능
-            left = mid+1
-        else: # 불가능
-            right = mid-1
-            answer = mid
-
+def solution(k, room_number):
+    rooms = [i for i  in range(k+2)]    # 1번 부터 k번 방까지 가장 작은 번호를 가리키도록. k값이 뭐든 런타임 에러가 안나기 위해 k+1까지 초기화.
+    answer = []
+    for num in room_number:
+        n = num
+        visit = [n]
+        if num == rooms[num]:
+            answer.append(num)
+            rooms[num] = rooms[num+1]
+        else:
+            while n != rooms[n]:
+                n = rooms[n]
+                visit.append(n)
+            answer.append(n)
+            for v in visit:
+                rooms[v] = n+1
     return answer
-
-
-print(solution([2, 4, 5, 3, 2, 1, 4, 2, 5, 1],3))
