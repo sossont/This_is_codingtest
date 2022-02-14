@@ -1,41 +1,16 @@
+'''
+1트 : 정확성은 통과, 효율성은 통과 못함
+효율성 통과 못할 줄 알았음..이거 완전 노가다로 푼거라
+일단은 0.5솔, 소요시간 : 15분
+'''
 
-
-
-def solution(k, room_number):
-    rooms = {}
-    answer = []
-
-    for num in room_number:
-        n = num
-        visit = [n]
-        while n in rooms:
-            n = rooms[n]
-            visit.append(n)
-        answer.append(n)
-        for j in visit:
-            rooms[j] = n+1
-    return answer
-
-def solution(k, room_number):
-    rooms = [i for i  in range(k+2)]    # 1번 부터 k번 방까지 가장 작은 번호를 가리키도록. k값이 뭐든 런타임 에러가 안나기 위해 k+1까지 초기화.
-    answer = []
-    for num in room_number:
-        if num == rooms[num]:
-            answer.append(num)
-            rooms[num] = rooms[num+1]
-        else:
-            while num != rooms[num]:
-                rooms[num] = rooms[num+1]
-                num = rooms[num+1]
-            answer.append(rooms[num])
-            rooms[num] = rooms[num+1]
-    return answer
+dic = {'a': 3, 'b': 2}
+sorted_dic = sorted(dic.items(), key=lambda item: item[1])
+print(sorted_dic[0][0])
+print(len(dic))
 
 '''
-1. 1번방 배정. 1->2를 가리킴
-2. 3번방 배정. 3->4를 가리킴
-3. 4번방 배정. 4->5를 가리킴
-4. 2번방 배정. 여기서 5번방을 가리키려면 어떻게 해야할까. 1->5를 가리켜야 한다.
-5. 5번방 배정. 여기서 3->6을 가리켜야한다.
+2트 : 딕셔너리 타입을 사용해보니 확실히 시간이 많이 줄었다. 정확성 코드는 22ms가 제일 오래걸리는것일정도(1트때는 3300까지감)
+근데 이것도 시간초과가 뜨네.. (테케 5,7,8,10,11,12,13,14,15)
 
 '''
