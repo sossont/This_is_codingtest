@@ -49,3 +49,41 @@ def solution(gems):
                     dic.pop(sorted_dic[0][0])
 
     return answer
+
+"""
+해설 참고한 3트 : 두 포인터 개념을 비슷하게 사용하면 간단하게 풀 수 있는 문제였다.
+딕셔너리 타입을 사용하는 게 맞는데, left right 개념을 이진탐색에 적용할 것이 아니라
+시작 포인터에 적용을 했어야 했다.
+"""
+
+def solution(gems):
+    jewelry = list(set(gems))  # 보석의 종류
+    answer = [0, 99999]
+    if len(jewelry) == 1:
+        answer = [1, 1]
+    else:
+        left = 0
+        right = 0
+        prev_right = -1
+        dic = {}
+        while right < len(gems) and left < len(gems):
+            if prev_right != right:
+                if gems[right] not in dic:
+                    dic[gems[right]] = 1
+                else:
+                    dic[gems[right]] += 1
+                prev_right = right
+
+            if len(dic) == len(jewelry): # 보석의 종류가 충분할 때
+                if right - left < answer[1] - answer[0]:    # 더 작은 경우면
+                    answer = [left+1,right+1]
+                dic[gems[left]] -= 1
+                if dic[gems[left]] == 0:
+                    dic.pop(gems[left])
+                left += 1
+            else:
+                right += 1
+    return answer
+
+g = ["ZZZ", "YYY", "NNNN", "YYY", "BBB"]
+print(solution(g))

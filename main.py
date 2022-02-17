@@ -1,16 +1,32 @@
-'''
-1트 : 정확성은 통과, 효율성은 통과 못함
-효율성 통과 못할 줄 알았음..이거 완전 노가다로 푼거라
-일단은 0.5솔, 소요시간 : 15분
-'''
 
-dic = {'a': 3, 'b': 2}
-sorted_dic = sorted(dic.items(), key=lambda item: item[1])
-print(sorted_dic[0][0])
-print(len(dic))
+def solution(gems):
+    jewelry = list(set(gems))  # 보석의 종류
+    answer = [0, 99999]
+    if len(jewelry) == 1:
+        answer = [1, 1]
+    else:
+        left = 0
+        right = 0
+        prev_right = -1
+        dic = {}
+        while right < len(gems) and left < len(gems):
+            if prev_right != right:
+                if gems[right] not in dic:
+                    dic[gems[right]] = 1
+                else:
+                    dic[gems[right]] += 1
+                prev_right = right
 
-'''
-2트 : 딕셔너리 타입을 사용해보니 확실히 시간이 많이 줄었다. 정확성 코드는 22ms가 제일 오래걸리는것일정도(1트때는 3300까지감)
-근데 이것도 시간초과가 뜨네.. (테케 5,7,8,10,11,12,13,14,15)
+            if len(dic) == len(jewelry): # 보석의 종류가 충분할 때
+                if right - left < answer[1] - answer[0]:    # 더 작은 경우면
+                    answer = [left+1,right+1]
+                dic[gems[left]] -= 1
+                if dic[gems[left]] == 0:
+                    dic.pop(gems[left])
+                left += 1
+            else:
+                right += 1
+    return answer
 
-'''
+g = ["ZZZ", "YYY", "NNNN", "YYY", "BBB"]
+print(solution(g))
