@@ -1,4 +1,3 @@
-
 # 정확성은 통과
 # 시간 초과는 어떻게 해결하지..? insert, delete를 쓰지 말라는 건가?
 
@@ -32,5 +31,4 @@ def solution(n, k, cmd):
             answer += 'O'
         else:
             answer += 'X'
-
     return answer
