@@ -1,36 +1,17 @@
+#왼쪽 아래
+d1 = [(0,-1), (1,-1), (1,0)]
 
-# 정확성은 통과
-# 시간 초과는 어떻게 해결하지..? insert, delete를 쓰지 말라는 건가?
+# 오른쪽 아래
+d2 = [(1,0),(1,1),(0,1)]
 
-def solution(n, k, cmd):
-    answer = ''
-    table = [i for i in range(n)]
-    ans = [0 for _ in range(n)]
-    delete = []
-    # k를 화살표로 사용한다.
-    for c in cmd:
-        if c == 'Z':
-            idx, val = delete.pop()
-            if idx <= k:
-                k += 1
-            table.insert(idx,val)
-        elif c == 'C':
-            delete.append([k,table[k]])
-            del table[k]
-            if k == len(table): # 마지막 행인경우
-                k -= 1
-        elif c[0] == 'U':
-            k -= int(c[2:])
-        elif c[0] == 'D':
-            k += int(c[2:])
+# 오른쪽 위
+d3 = [(-1,0),(-1,1),(0,1)]
 
-    for idx, val in delete:
-        ans[val] = 1
+# 왼쪽 위
+d4 = [(-1,0),(-1,-1),(0,-1)]
 
-    for a in ans:
-        if a == 0:
-            answer += 'O'
-        else:
-            answer += 'X'
+d = [d1, d2, d3, d4]
 
-    return answer
+for dd in d:
+    for x in dd:
+        print(x[0])
