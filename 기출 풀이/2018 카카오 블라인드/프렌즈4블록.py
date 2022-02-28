@@ -40,11 +40,12 @@ def solution(m, n, board):
         for x in range(n):
             for y in range(m-1,-1,-1):
                 if board[y][x] == " ":  # 밑으로 내리기
-
-                    for k in range(y, -1,-1):
-                        if board[k][x] != " ":
+                    # 빈칸일 때.
+                    for k in range(y-1, -1,-1):
+                        if board[k][x] != " ": # 빈칸이 아니면 내려준다.
                             board[y][x] = board[k][x]
                             board[k][x] = " "
+                            break
 
     return answer
 
