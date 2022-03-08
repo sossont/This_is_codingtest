@@ -48,7 +48,7 @@ def calc(info, idx, arrow_count, total, arrows, score):
         return
 
     new_arrows = arrows.copy()
-    pass_arrows = arrows.copy()
+    pass_arrows = arrows
     new_arrows.append(info[idx] + 1)
     pass_arrows.append(0)
 
@@ -59,6 +59,4 @@ def calc(info, idx, arrow_count, total, arrows, score):
     calc(info, idx + 1, arrow_count - (info[idx] + 1), total + 10 - idx, new_arrows, next_score)  # 이번에 점수를 획득한 경우
     calc(info, idx + 1, arrow_count, total, pass_arrows, score)  # 이번에 획득하지 않고 다음으로 넘어간 경우
 
-
-print(solution(10,[0, 0, 0, 0, 0, 0, 0, 0, 3, 4, 3]))
 
