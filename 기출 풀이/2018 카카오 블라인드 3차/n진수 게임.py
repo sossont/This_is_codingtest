@@ -44,5 +44,3 @@ def solution(n, t, m, p):
             turn -= m
 
     return answer
-
-print(solution(16,16,2,1))
