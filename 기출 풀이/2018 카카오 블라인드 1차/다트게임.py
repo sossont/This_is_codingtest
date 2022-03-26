@@ -37,3 +37,38 @@ def solution(dartResult):
         print(answer)
         idx += 1
     return answer
+
+# 정규 표현식 써서 푼 코드
+
+import re
+
+def solution(dartResult):
+    p = re.compile('[0-9]+[SDT][*#]?')
+    scores = p.findall(dartResult)
+    total = 0
+    prev_num = 0
+    for score in scores:
+        r = re.compile('[0-9]+')
+        num = int(r.match(score).group()) # 숫자
+        if score[-1] == '*':
+            if score[-2] == 'D':
+                num = pow(num,2)
+            elif score[-2] == 'T':
+                num = pow(num,3)
+            num = num * 2
+            total += num + prev_num
+        elif score[-1] == '#':
+            if score[-2] == 'D':
+                num = pow(num,2)
+            elif score[-2] == 'T':
+                num = pow(num,3)
+            num = -num
+            total += num
+        else:
+            if score[-1] == 'D':
+                num = pow(num,2)
+            elif score[-1] == 'T':
+                num = pow(num,3)
+            total += num
+        prev_num = num
+    return total
