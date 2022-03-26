@@ -53,3 +53,24 @@ def solution(n, arr1, arr2):
         answer.append(ans_str)
 
     return answer
+
+
+# 비트 연산 풀이
+
+def solution(n, arr1, arr2):
+    answer = []
+    for i in range(n):
+        string = ''
+        ans = bin(arr1[i] | arr2[i])
+        ans = ans[2:]
+        if len(ans) != n:
+            tmp = " " * (n - len(ans))
+            ans = tmp + ans
+        for a in ans:
+            if a == '1':
+                string += '#'
+            else:
+                string += ' '
+        answer.append(string)
+
+    return answer
