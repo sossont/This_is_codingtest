@@ -68,3 +68,54 @@ def solution(info, query):
         answer.append(ans)
 
     return answer
+
+
+## 해설 참고한 풀이
+## 바로 통과하네..
+
+def solution(info, query):
+    dic = {}
+    answer = []
+    for person in info:
+        infos = person.split(' ')
+        lang, job, exp, food, score = infos[0], infos[1], infos[2], infos[3], int(infos[4])
+        langs = [lang, '-']
+        jobs = [job, '-']
+        exps = [exp, '-']
+        foods = [food, '-']
+        for l in langs:
+            for j in jobs:
+                for e in exps:
+                    for f in foods:
+                        sentence = l + j + e + f
+                        if sentence not in dic:
+                            dic[sentence] = [score]
+                        else:
+                            dic[sentence].append(score)
+
+    for key in dic.keys():
+        dic[key] = sorted(dic[key])
+    for q in query:
+        q = q.split(' and ')
+        score = int(q[3].split(' ')[1])
+        sent = q[0] + q[1] + q[2] + q[3].split(' ')[0]
+        if sent in dic:
+            people = dic[sent]
+            answer.append(len(people) - lower_bound(people, score))
+        else:
+            answer.append(0)
+
+    return answer
+
+
+def lower_bound(arr, target):
+    left, right = 0, len(arr)
+
+    while left < right:
+        mid = left + (right - left) // 2
+        if arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid
+
+    return right
