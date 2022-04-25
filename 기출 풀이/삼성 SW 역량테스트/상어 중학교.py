@@ -1,6 +1,5 @@
-# 초등학교 + 중학교 2시간 컷 
+# 초등학교 + 중학교 2시간 컷
 
-from collections import deque
 import heapq
 
 N, M = map(int, input().split())
@@ -32,14 +31,14 @@ def check(cy, cx):
 def remove_block(start_y, start_x, num):
     global delta
     global graph
-    q = deque([])
+    q = []
     visited = [[False] * N for _ in range(N)]
     q.append([start_y, start_x])
     visited[start_y][start_x] = True
     yxlist = [[start_y, start_x]]
     # BFS
     while q:
-        cy, cx = q.popleft()
+        cy, cx = q.pop(0)
         for d in delta:
             ny = cy + d[0]
             nx = cx + d[1]
@@ -93,7 +92,7 @@ while True:
             if block_visit[y][x]:
                 continue
 
-            q = deque([])
+            q = []
             isvisited = [[False] * N for _ in range(N)]
             block_num = graph[y][x]
             rainbow_count = 0  # 무지개 블록 개수
@@ -103,7 +102,7 @@ while True:
 
             # BFS
             while q:
-                cy, cx = q.popleft()
+                cy, cx = q.pop(0)
                 for d in delta:
                     ny = cy + d[0]
                     nx = cx + d[1]
