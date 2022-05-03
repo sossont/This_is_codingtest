@@ -41,20 +41,17 @@ def solution(stones, k):
 
 # 이분 탐색 이용해야 풀리는 문제
 # 어렵다.
-
 def solution(stones, k):
     answer = 0
     left = 0
-    right = max(stones)
+    right = 200000000
     while left <= right:
         mid = int( (left+right) / 2)
         arr = []
         count = 0
-        for stone in stones:
-            arr.append(stone - mid)
-        print(arr)
 
-        for num in arr:
+        for stone in stones:
+            num = stone - mid
             if count < k:
                 if num <= 0:
                     count += 1
@@ -63,11 +60,10 @@ def solution(stones, k):
 
         if count < k:  # 가능
             left = mid+1
+            answer = mid + 1
         else: # 불가능
             right = mid-1
-            answer = mid
 
     return answer
-
 
 print(solution([2, 4, 5, 3, 2, 1, 4, 2, 5, 1],3))

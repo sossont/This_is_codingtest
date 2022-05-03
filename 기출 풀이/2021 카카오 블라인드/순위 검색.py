@@ -1,3 +1,52 @@
+## 2회차 풀이
+import bisect
+
+dic = {}
+
+def solution(info, query):
+    answer = []
+    global dic
+    for inf in info:
+        string = inf.split(' ')
+        score = int(string[-1])
+        string = string[:-1]
+        create_info(string[0], string, 1, score)
+        create_info('-', string, 1, score)
+
+    for key in dic.keys():
+        dic[key].sort()
+
+    for que in query:
+        string = que.split(' ')
+        tmp = []
+        for s in string:
+            if s == 'and':
+                continue
+            tmp.append(s)
+        score = int(tmp[-1])
+        string = tmp[:-1]
+        real_query = ''.join(string)
+        if real_query in dic:
+            ans = bisect.bisect_left(dic[real_query], score)
+            answer.append(len(dic[real_query]) - ans)
+        else:
+            answer.append(0)
+
+    return answer
+
+
+def create_info(string, arr, idx, score):
+    global dic
+    if idx == 4:
+        if string in dic:
+            dic[string].append(score)
+        else:
+            dic[string] = [score]
+        return
+
+    create_info(string + arr[idx], arr, idx + 1, score)
+    create_info(string + '-', arr, idx + 1, score)
+
 # 당연히 시간초과
 # 정확성은 통과
 
